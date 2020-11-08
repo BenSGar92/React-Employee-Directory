@@ -4,10 +4,7 @@ import Banner from "../src/components/Banner"
 import Container from "../src/components/Container"
 import SearchResults from "../src/components/SearchResults"
 import SearchBox from "../src/components/SearchBox"
-// import Container from "../components/Container";
-// import SearchForm from "../components/SearchForm";
-// import SearchResults from "../components/SearchResults";
-// import Alert from "../components/Alert";
+
 
 class App extends Component {
   state = {
@@ -20,7 +17,7 @@ class App extends Component {
   // When the component mounts, get a list of all available base breeds and update this.state.breeds
   componentDidMount() {
     API.getUsers()
-      .then(res => this.setState({ employees: res.data.results }))
+      .then(res => this.setState({ employees: res.data.results, results: res.data.results }))
       .catch(err => console.log(err));
   }
 
@@ -30,25 +27,25 @@ class App extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    // API.getDogsOfBreed(this.state.search)
-    //   .then(res => {
-    //     if (res.data.status === "error") {
-    //       throw new Error(res.data.message);
-    //     }
-    //     this.setState({ results: res.data.message, error: "" });
-    //   })
-    //   .catch(err => this.setState({ error: err.message }));
+    const filteredUsers = this.state.employees.filter((employee) => {
+      const fullName = [employee.name.first, employee.name.last].join(" ").toLowerCase()
+      return fullName.includes(this.state.search.toLowerCase())
+      
+    })
+    this.setState({
+      results: filteredUsers
+    })
   };
   render() {
     return (
       <div>
-         <Banner backgroundImage="https://i.imgur.com/qkdpN.jpg">
+         <Banner backgroundImage="https://images.pexels.com/photos/3184396/pexels-photo-3184396.jpeg?cs=srgb&dl=pexels-fauxels-3184396.jpg&fm=jpg">
           <h1>Employee Directory</h1>
         </Banner>
         <Container>
-          <SearchBox>
+          <SearchBox onChange={this.handleInputChange} onSubmit={this.handleFormSubmit}>
           </SearchBox>
-          <SearchResults results={this.state.employees}>
+          <SearchResults results={this.state.results}>
           </SearchResults>
         </Container>
       </div>

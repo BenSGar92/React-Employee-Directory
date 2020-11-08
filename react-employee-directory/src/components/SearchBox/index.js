@@ -8,8 +8,7 @@ function SearchBox(props) {
       <div className="form-group row">
         <div className="col-10">
             <input
-            value={props.search}
-            onChange={props.handleInputChange}
+            onChange={props.onChange}
             name="employee"
             list="employees"
             type="text"
@@ -19,7 +18,7 @@ function SearchBox(props) {
             />
         </div>
         <div className="col-2">
-            <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
+            <button type="submit" onClick={props.onSubmit} className="btn btn-success">
                 Search
             </button>
         </div>

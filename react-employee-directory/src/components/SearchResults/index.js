@@ -3,12 +3,11 @@ import "./searchResults.css";
 
 function SearchResults(props) {
   return (
-    <ul className="list-group search-results">
-        {props.children}
-       
-        {props.results.map(result => (
-            <li key={result} className="list-group-item">
+    <ul className="list-group search-results">      
+        {props.results.map((result, id) => (
+            <li key={id} className="list-group-item">
                 <div className="row">
+                    
                     <div className="col-2">
                         <img alt="Dog" src={result.picture.thumbnail} className="img-fluid" />
                     </div>
@@ -19,7 +18,7 @@ function SearchResults(props) {
                         {result.phone}
                     </div>
                     <div className="col-2">
-                        {result.location.city} {result.location.state}
+                        {result.location.city}, {result.location.state}
                     </div>
                     <div className="col-4">
                         {result.email}
