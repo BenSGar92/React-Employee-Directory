@@ -3,13 +3,13 @@ import "./searchResults.css";
 
 function SearchResults(props) {
   return (
-    <ul className="list-group search-results">      
+    <ul className="list-group search-results">    
         {props.results.map((result, id) => (
             <li key={id} className="list-group-item">
                 <div className="row">
                     
                     <div className="col-2">
-                        <img alt="Dog" src={result.picture.thumbnail} className="img-fluid" />
+                        <img src={result.picture.thumbnail} className="img-fluid" />
                     </div>
                     <div className="col-2">
                         {result.name.first} {result.name.last}
